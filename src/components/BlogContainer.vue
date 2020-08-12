@@ -1,12 +1,14 @@
 <template>
-	<section class="container">
-		<div class="container__post" v-for="(post, index) in posts" :key="index">
-			<h3 class="container__post-title">
-        <router-link :to="`/posts/${post.id}`">{{ post.title }}</router-link>
-
-
+	<section>
+    <h2>Trending <span class="rounded colored-text">Posts</span></h2>
+    <div class="container">
+      <div class="container__post" v-for="(post, index) in posts" :key="index">
+			<h3 class="container__post-title rounded">
+        <router-link :class="['none']" :to="{name: 'BlogPost', params:{ id: post.id }  }"> <i class="far fa-newspaper"></i> {{ post.title }}</router-link>
         </h3>
 		</div>
+    </div>
+
 	</section>
 </template>
 
@@ -40,7 +42,6 @@ export default {
 .container {
 	width: 95%;
 	max-width: 70rem;
-	box-shadow: 0 0px 2px 1px rgba(0, 0, 0, 0.9);
 	margin: 1rem auto;
 	padding: 1.5rem;
 
@@ -50,9 +51,22 @@ export default {
       padding: 1rem;
       margin-bottom: 2rem;
       border: 2px dashed var(--color-primary);
-      border-radius: 4px;
+
 
     }
 	}
+}
+
+.none {
+	text-decoration: none;
+}
+
+h2 {
+	font-size: 3rem;
+	text-align: center;
+	padding: 2.5rem;
+	margin-top: 10rem;
+
+
 }
 </style>
