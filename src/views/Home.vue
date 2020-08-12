@@ -1,14 +1,12 @@
 <template>
 	<div class="home">
-    <app-header></app-header>
 		<app-blog-container :limit="20"></app-blog-container>
-
 	</div>
 </template>
 
 <script>
 
-import Header from '@/components/Header.vue'
+
 import BlogContainer from '@/components/BlogContainer.vue'
 
 export default {
@@ -19,7 +17,6 @@ export default {
     };
 	},
 	components: {
-		appHeader: Header,
 		appBlogContainer: BlogContainer
   },
 
