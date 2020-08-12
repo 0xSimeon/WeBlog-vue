@@ -1,10 +1,11 @@
 <template>
 	<div>
 		<header class="header">
-			<img alt="Wejapa logo" class="header__logo" src="../assets/wejapa.png" />
-			<h1 class="header__title">WeBlog</h1>
+			<router-link to="/" :class="['header__box']">
+				<img alt="Wejapa logo" class="header__logo" src="../assets/wejapa.png" />
+				<h1 class="header__title">WeBlog</h1>
+			</router-link>
 		</header>
-		<h2>Trending Blog Posts: </h2>
 	</div>
 </template>
 
@@ -13,13 +14,29 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-
-
 .header {
-	display: flex;
-	align-items: center;
-	padding: 2rem;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+	background: linear-gradient(var(--color-black), var(--color-black));
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 10;
+
+	&__box {
+		display: flex;
+		align-items: center;
+		padding: 1rem;
+		opacity: 0.5;
+		transition: all 0.2s;
+		cursor: pointer;
+		text-decoration: none;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
 	&__logo {
 		width: 60px;
 		height: 60px;
@@ -31,12 +48,5 @@ export default {};
 		background-clip: text;
 		-webkit-text-fill-color: transparent;
 	}
-}
-
-h2 {
-	font-size: 3rem;
-	text-align: center;
-	padding: 2.5rem;
-	margin-top: 2rem; 
 }
 </style>
