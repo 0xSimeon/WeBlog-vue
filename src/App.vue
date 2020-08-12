@@ -1,14 +1,18 @@
 <template>
 	<div id="app">
-		<app-home></app-home>
+		<app-header></app-header>
+		<router-view></router-view>
 	</div>
 </template>
 
 <script>
-import Home from '@/views/Home.vue';
+import Header from '@/components/Header.vue';
 export default {
 	components: {
-		appHome: Home,
+		appHeader: Header,
+	},
+	created() {
+		document.cookie = 'cookie2=value2; SameSite=None; Secure';
 	},
 };
 </script>
@@ -19,6 +23,7 @@ export default {
 	--color-tertiary: #f0f3bd;
 	--color-blue: #05668d;
 	--color-dave: #f0f3bd;
+	--color-black: rgba(0, 0, 0, 1);
 }
 
 *,
@@ -30,28 +35,45 @@ export default {
 }
 
 html {
-	font-size: 62.5%;
+	font-size: 56.25%;
 	box-sizing: border-box;
 }
 
 body {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Raleway', sans-serif;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
 	font-family: 'Merriweather', serif;
 }
+// utility classes
+.u-ml {
+	margin-left: 1.5rem;
+}
+.u-m {
+	margin: 2rem auto;
+}
 
-#nav {
-	padding: 30px;
+.bold {
+	font-weight: 600;
+}
 
-	a {
-		font-weight: bold;
-		color: #2c3e50;
+.rounded {
+	border-radius: 3px;
+}
 
-		&.router-link-exact-active {
-			color: #42b983;
-		}
+.colored-text {
+	background: var(--color-primary);
+	color: #fff;
+	padding: 1rem;
+}
+
+@media only screen and (min-width: 37.5em) {
+	html {
+		font-size: 62.5%;
 	}
 }
 </style>
