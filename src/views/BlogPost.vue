@@ -7,9 +7,10 @@
 		<p class="blog__post-meta u-m">
 			<span class="">12 August, 2020.</span> &bullet;
 			<span class="u-ml"><i class="far fa-comment"></i> {{ comments.length }} </span> &bullet;
-			<span class="blog__post-meta-author"> by
+			<span class="blog__post-meta-author">
+				by
 				<router-link :class="['blog__post-meta-link none link']" to="/author/simeon">Simeon Udoh</router-link>
-				 </span>
+			</span>
 		</p>
 		<img
 			class="blog__post-img"
@@ -90,6 +91,7 @@ export default {
 		return {
 			id: this.$route.params.id,
 			postDetails: [],
+			title: '',
 			comments: [],
 			userComment: {
 				name: '',
@@ -100,12 +102,14 @@ export default {
 			success: false,
 		};
 	},
+
 	methods: {
 		async getPostDetails() {
 			try {
 				const response = await axios.get(`posts/${this.id}`);
 				const comments = await axios.get(`posts/${this.id}/comments`);
 				this.postDetails = response.data;
+
 				this.comments = comments.data;
 				// const localComment = localStorage.getItem('comment');
 				if (!localStorage.getItem('comment')) {
@@ -113,10 +117,7 @@ export default {
 				} else {
 					const localComment = JSON.parse(localStorage.getItem('comment'));
 					this.comments.push(localComment);
-					console.log(typeof localComment);
 				}
-
-				console.log(this.comments);
 			} catch (error) {
 				console.log(error);
 			}
@@ -144,8 +145,13 @@ export default {
 			}
 		},
 	},
+
 	created() {
 		this.getPostDetails();
+	},
+	title() {
+		this.title = `Blog | ${this.postDetails.title}`;
+		return `${this.title}`;
 	},
 	filters: {
 		reverse(value) {
@@ -225,11 +231,9 @@ export default {
 		padding: 0.2rem;
 		flex-flow: row wrap;
 
-
-
 		&-link {
 			color: var(--color-primary);
-			transition: color .2s;
+			transition: color 0.2s;
 
 			&:hover {
 				color: var(--color-tertiary);
@@ -259,8 +263,6 @@ export default {
 		display: block;
 	}
 
-
-	
 	&__error,
 	&__success {
 		color: #fff;

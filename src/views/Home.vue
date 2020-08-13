@@ -5,24 +5,20 @@
 </template>
 
 <script>
-
-
-import BlogContainer from '@/components/BlogContainer.vue'
+import BlogContainer from '@/components/BlogContainer.vue';
 
 export default {
 	name: 'Home',
+	title() {
+		return `Home | WeBlog`;
+	},
 	data() {
-		return {
-
-    };
+		return {};
 	},
 	components: {
-		appBlogContainer: BlogContainer
-  },
-
+		appBlogContainer: BlogContainer,
+	},
 };
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

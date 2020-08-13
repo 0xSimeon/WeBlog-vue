@@ -21,11 +21,6 @@ const routes = [
 		component: () => import('../views/Author.vue'),
   },
 
-  {
-		path: '/author/simeon',
-		name: 'Author',
-		component: () => import('../views/Author.vue'),
-	},
 ];
 
 const router = new VueRouter({
