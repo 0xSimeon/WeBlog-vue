@@ -1,14 +1,18 @@
 <template>
 	<section>
-    <h2>Trending <span class="rounded colored-text">Posts</span></h2>
-    <div class="container">
-      <div class="container__post" v-for="(post, index) in posts" :key="index">
-			<h3 class="container__post-title rounded">
-        <router-link :class="['none']" :to="{name: 'BlogPost', params:{ id: post.id }  }"> <i class="far fa-newspaper"></i> {{ post.title }}</router-link>
-        </h3>
+		<h2>Trending <span class="rounded colored-text">Posts</span></h2>
+		<div class="container">
+			<div class="container__post" v-for="(post, index) in posts" :key="index">
+				<h3 class="container__post-title rounded">
+					<p>
+						<router-link :class="['none']" :to="{ name: 'BlogPost', params: { id: post.id } }">
+							<i class="far fa-newspaper"></i> {{ post.title }}</router-link
+						> <br>
+						&mdash; By <router-link :class="['none container__post-link']" to="/author/simeon">Simeon Udoh</router-link>
+					</p>
+				</h3>
+			</div>
 		</div>
-    </div>
-
 	</section>
 </template>
 
@@ -24,7 +28,6 @@ export default {
 		try {
 			const response = await axios.get('/posts');
 			this.posts = response.data.splice(0, this.limit);
-			console.log(this.posts);
 		} catch (error) {
 			console.log(error);
 		}
@@ -47,26 +50,33 @@ export default {
 
 	&__post {
 		font-size: 2rem;
-    &-title {
-      padding: 1rem;
-      margin-bottom: 2rem;
-      border: 2px dashed var(--color-primary);
+		&-title {
+			padding: 1rem;
+			margin-bottom: 2rem;
+			border: 2px dashed var(--color-primary);
+		}
 
+		&-link {
+			font-size: 1.7rem;
+			color: var(--color-primary);
+			transition: all .2s;
 
-    }
+			&:hover {
+			color: 	var(--color-secondary);
+			}
+		}
 	}
 }
 
-.none {
-	text-decoration: none;
+br {
+	display: none;
 }
+
 
 h2 {
 	font-size: 3rem;
 	text-align: center;
 	padding: 2.5rem;
 	margin-top: 10rem;
-
-
 }
 </style>

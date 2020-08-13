@@ -27,7 +27,7 @@ export default {};
 		display: flex;
 		align-items: center;
 		padding: 1rem;
-		opacity: 0.5;
+		opacity: 0.8;
 		transition: all 0.2s;
 		cursor: pointer;
 		text-decoration: none;

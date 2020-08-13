@@ -5,8 +5,11 @@
 		</div>
 		<h2 class="blog__post-title u-m">{{ postDetails.title | capitalize }}</h2>
 		<p class="blog__post-meta u-m">
-			<span class="u-ml">12 August, 2020.</span>
-			<span class="u-ml"><i class="far fa-comment"></i> {{ comments.length }} </span>
+			<span class="">12 August, 2020.</span> &bullet;
+			<span class="u-ml"><i class="far fa-comment"></i> {{ comments.length }} </span> &bullet;
+			<span class="blog__post-meta-author"> by
+				<router-link :class="['blog__post-meta-link none link']" to="/author/simeon">Simeon Udoh</router-link>
+				 </span>
 		</p>
 		<img
 			class="blog__post-img"
@@ -74,7 +77,7 @@
 				<p v-if="error" class="form__error rounded u-m">Sorry, You have to fill all details to post a comment.</p>
 				<p v-if="success" class="form__success rounded u-m">Voila! You comment was submitted successfully.</p>
 
-				<button class="form__btn u-m rounded" @click.prevent="postComment">Submit Comment</button>
+				<button class="btn u-m rounded" @click.prevent="postComment">Submit Comment</button>
 			</form>
 		</div>
 	</section>
@@ -220,6 +223,18 @@ export default {
 	&-meta {
 		display: flex;
 		padding: 0.2rem;
+		flex-flow: row wrap;
+
+
+
+		&-link {
+			color: var(--color-primary);
+			transition: color .2s;
+
+			&:hover {
+				color: var(--color-tertiary);
+			}
+		}
 	}
 }
 
@@ -244,19 +259,8 @@ export default {
 		display: block;
 	}
 
-	&__btn {
-		padding: 1rem 1.5rem;
-		background: var(--color-primary);
-		color: #fff;
-		border: none;
-		font-size: 2.5rem;
-		cursor: pointer;
-		transition: all 0.2s;
 
-		&:hover {
-			background: var(--color-black);
-		}
-	}
+	
 	&__error,
 	&__success {
 		color: #fff;
@@ -328,6 +332,10 @@ hr {
 
 		&-body {
 			font-size: 2rem;
+		}
+
+		&-meta-author {
+			margin-left: 1.5rem;
 		}
 
 		&-comments-box {

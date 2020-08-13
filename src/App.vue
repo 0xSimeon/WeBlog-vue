@@ -13,7 +13,6 @@ export default {
 	components: {
 		appHeader: Header,
 		appFooter: Footer,
-
 	},
 };
 </script>
@@ -70,6 +69,56 @@ h4 {
 	background: var(--color-primary);
 	color: #fff;
 	padding: 1rem;
+}
+
+.none {
+	text-decoration: none;
+}
+.link {
+	text-decoration: none;
+	color: var(--color-primary);
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	margin-left: 0.3rem;
+
+	&:hover {
+		color: #fff;
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		bottom: 0;
+		left: -0.25em;
+		right: -0.25em;
+		background-color: var(--color-secondary);
+		transform-origin: bottom center;
+		transform: scaleY(0.1);
+		transition: all 0.1s ease-in-out;
+	}
+
+	&:hover::before {
+		transform: scaleY(1);
+		background-color: var(--color-blue);
+		color: #fff;
+	}
+}
+.btn {
+	padding: 1rem 1.5rem;
+	background: var(--color-primary);
+	color: #fff;
+	border: none;
+	font-size: 2.5rem;
+	cursor: pointer;
+	transition: all 0.2s;
+	display: inline-block;
+
+	&:hover {
+		background: var(--color-black);
+	}
 }
 
 @media only screen and (min-width: 37.5em) {
