@@ -71,8 +71,8 @@
 					rows="8"
 					class="rounded"
 				></textarea>
-        <p v-if="error" class="form__error rounded u-m">Sorry, You have to fill all details to post a comment.</p>
-        <p v-if="success" class="form__success rounded u-m">Voila! You comment was submitted successfully.</p>
+				<p v-if="error" class="form__error rounded u-m">Sorry, You have to fill all details to post a comment.</p>
+				<p v-if="success" class="form__success rounded u-m">Voila! You comment was submitted successfully.</p>
 
 				<button class="form__btn u-m rounded" @click.prevent="postComment">Submit Comment</button>
 			</form>
@@ -92,9 +92,9 @@ export default {
 				name: '',
 				email: '',
 				body: '',
-      },
-      error: false,
-      success: false
+			},
+			error: false,
+			success: false,
 		};
 	},
 	methods: {
@@ -103,38 +103,43 @@ export default {
 				const response = await axios.get(`posts/${this.id}`);
 				const comments = await axios.get(`posts/${this.id}/comments`);
 				this.postDetails = response.data;
-        this.comments = comments.data;
-        const localComment = JSON.parse(localStorage.getItem('comment'))
-        this.comments.push(localComment);
-
+				this.comments = comments.data;
+				// const localComment = localStorage.getItem('comment');
+				if (!localStorage.getItem('comment')) {
+					return;
+				} else {
+					const localComment = JSON.parse(localStorage.getItem('comment'));
+					this.comments.push(localComment);
+					console.log(typeof localComment);
+				}
 
 				console.log(this.comments);
 			} catch (error) {
 				console.log(error);
 			}
-    },
-    postComment() {
-      if (!this.userComment.email && !this.userComment.name && !this.userComment.messsage) {
-          this.error = !this.error;
+		},
+		postComment() {
+			if (!this.userComment.email && !this.userComment.name && !this.userComment.messsage) {
+				this.error = !this.error;
 
-        setTimeout(() => {
-          this.error = false;
-        }, 2000);
-        return;
-      } else {
-          this.success = !this.success;
-        setTimeout(() => {
-          this.success = false;
-        }, 2000);
-        this.comments.push(this.userComment);
-        localStorage.setItem('comment', JSON.stringify(this.userComment));
-        this.userComment = {
-          name: '',
-          email: '',
-          body: ''
-        }
-      }
-    }
+				setTimeout(() => {
+					this.error = false;
+				}, 2000);
+				return;
+			} else {
+				this.success = !this.success;
+				setTimeout(() => {
+					this.success = false;
+				}, 2000);
+				this.comments.push(this.userComment);
+				localStorage.setItem('comment', JSON.stringify(this.userComment));
+				this.userComment = {
+					name: '',
+					email: '',
+					body: '',
+				};
+			}
+		},
 	},
 	created() {
 		this.getPostDetails();
@@ -186,7 +191,8 @@ export default {
 	.blog__post-comments-box--text,
 	label,
 	.form__btn,
-  .form__error {
+	.form__error,
+	.form__success {
 		font-size: 2rem;
 	}
 
@@ -251,23 +257,63 @@ export default {
 			background: var(--color-black);
 		}
 	}
-  &__error, &__success {
-    color: #fff;
-    padding: 1rem;
-  }
-  &__error {
-    background: rgba(182, 21, 21, 0.637);
-  }
+	&__error,
+	&__success {
+		color: #fff;
+		padding: 1rem;
+	}
+	&__error {
+		background: rgba(182, 21, 21, 0.637);
+	}
 
-  &__success {
-    background: rgb(19, 202, 19);
-  }
+	&__success {
+		background: var(--color-primary);
+	}
 }
-
-
 
 hr {
 	margin-top: 2rem;
+}
+
+.pulse {
+	-webkit-animation-name: pulse;
+	animation-name: pulse;
+}
+
+// ANIMATION:
+
+@-webkit-keyframes pulse {
+	from {
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+
+	50% {
+		-webkit-transform: scale3d(1.05, 1.05, 1.05);
+		transform: scale3d(1.05, 1.05, 1.05);
+	}
+
+	to {
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+}
+/* PULSE */
+@keyframes pulse {
+	from {
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+
+	50% {
+		-webkit-transform: scale3d(1.05, 1.05, 1.05);
+		transform: scale3d(1.05, 1.05, 1.05);
+	}
+
+	to {
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
 }
 
 @media only screen and (min-width: 37.5em) {
